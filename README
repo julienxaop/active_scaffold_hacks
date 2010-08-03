@@ -9,4 +9,7 @@ This hack now solve the problem.
 
 Take a look at the active_scaffold_hacks/lib/active_scaffold/constraints.rb file for more informations.
 
+Install this plugin to your rails application from github via the rails command:
+script/plugin install git://github.com/julienxaop/active_scaffold_hacks.git
+
 

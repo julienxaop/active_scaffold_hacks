@@ -8,6 +8,11 @@ ActiveScaffold::Constraints.class_eval do
     # we have to use the other model's primary_key.
     #
     # please see the relevant tests for concrete examples.
+    association.reverse(value) # This will initialize the reverse asociation if the association is polymorphic. (valie is the parent object id)
+    #ActiveScaffold didn't set the reverse class_name correctly. This is fixed (hacked) in 'reverse_associations.rb'
+    #Initialising the reverse association here is many not necessary but even if we don't need to ask the association for his reverse one I think it's better to set the reverse class_name correctly.
+
+
     field = if [:has_one, :has_many].include?(association.macro)
       association.klass.primary_key
     elsif [:has_and_belongs_to_many].include?(association.macro)
@@ -15,7 +20,6 @@ ActiveScaffold::Constraints.class_eval do
     else
       association.options[:foreign_key] || association.name.to_s.foreign_key
     end
-
     table = case association.macro
     when :has_and_belongs_to_many
       association.options[:join_table]
@@ -35,7 +39,7 @@ ActiveScaffold::Constraints.class_eval do
     if [:has_many, :has_one].include?(association.macro) #julien: 
       # association.klass is the table that belongs_to the other and value is the id of the calling object. (So association.klass.find(value) is the calling object. We'll found the id of the object that have many
       #objects of the other table by calling the 'foreign_key' to the table that belongs_to the other
-      value = association.klass.find(value).send(association.options[:foreign_key] || association.name.to_s.foreign_key)
+      value = association.klass.find(value).send(association.options[:foreign_key] || association.reverse.to_s.foreign_key)
     end
     # Julien: Thanks to my hack the table and the value used in the condition below is now fixed for the :has_many and :has_one cases
     condition = constraint_condition_for("#{table}.#{field}", value)

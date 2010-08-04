@@ -1,7 +1,8 @@
-For the moment this plugin only contain one hack:
+#################################################
+Nested relations  Hack
 #################################################
 
-This hack the 'condition_from_association_constraint' method initialy defined in active_scaffold/lib/active_scaffold/constraints.rb
+This plugin hack the 'condition_from_association_constraint' method initialy defined in active_scaffold/lib/active_scaffold/constraints.rb
 
 The ActiveScaffold neested links only worked in one direction for the 'has_many-belongs_to' and 'has_one-belongs_to' relations.
 
@@ -9,7 +10,9 @@ This hack now solve the problem.
 
 Take a look at the active_scaffold_hacks/lib/active_scaffold/constraints.rb file for more informations.
 
-Install this plugin to your rails application from github via the rails command:
-script/plugin install git://github.com/julienxaop/active_scaffold_hacks.git
+-----
+There is also a hack that fix the polymorphic nested relations that ActiveScafold didn't handle correctly.
+This issue is fixed in active_scaffold_hacks/lib/extensions/reverse_associations.rb
+and in active_scaffold_hacks/frontends/default/views/_nested.html.erb
 
 

@@ -14,15 +14,17 @@ The ActiveScaffold neested links only worked in one direction for the 'has_many-
 This hack now solve the problem.
 
 Take a look at the active_scaffold_hacks/lib/active_scaffold/constraints.rb file for more informations.
+commit => http://github.com/julienxaop/active_scaffold_hacks/commit/b128c0635fa1ef7361bf01067e0bfadd0c7ffa27 
 
 -----
 There is also a hack that fix the polymorphic nested relations that ActiveScafold didn't handle correctly.
 This issue is fixed in active_scaffold_hacks/lib/extensions/reverse_associations.rb
 and in active_scaffold_hacks/frontends/default/views/_nested.html.erb
-
+commit => http://github.com/julienxaop/active_scaffold_hacks/commit/2211beb774ec64878112ea1f5c431d36b7098ed9
 
 
 -----
-THere is also a hack that fix the one-model-loop nested relation (when a same model have both the :has_many and :belongs_to relations).
+There is also a hack that fix the one-model-loop nested relation (when a same model have both the :has_many and :belongs_to relations).
 ActiveScaffold didn't handle this case.
 The fix is in active_scaffold_hacks/lib/extensions/reverse_associations.rb at the end of the 'reverse_matches_for' method
+commit => http://github.com/julienxaop/active_scaffold_hacks/commit/4ed532db3835e7c15d78e9fb841f364f300bc6d3

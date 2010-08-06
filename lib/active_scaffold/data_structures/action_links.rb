@@ -5,4 +5,5 @@ ActiveScaffold::DataStructures::ActionLinks.class_eval do
     # NOTE: this duplicate check should be done by defining the comparison operator for an Action data structure
     @set << link unless @set.any?{|a| a.action == link.action and a.controller == link.controller and a.parameters == link.parameters} || link.hidden
   end
+  alias_method :<<, :add
 end

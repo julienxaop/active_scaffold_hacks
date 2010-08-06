@@ -3,9 +3,9 @@ Install this plugin to your rails application via the rails command:
 script/plugin install git://github.com/julienxaop/active_scaffold_hacks.git
 -------------------------------------------------------------
 
-#################################################
-Nested ActiveScaffold links issues
-#################################################
+############################
+Nested ActiveScaffold links:
+############################
 
 This plugin hack the 'condition_from_association_constraint' method initialy defined in active_scaffold/lib/active_scaffold/constraints.rb
 
@@ -28,3 +28,20 @@ There is also a hack that fix the looped nested relation (when a same model have
 ActiveScaffold didn't handle this case.
 This issue is fixed in active_scaffold_hacks/lib/extensions/reverse_associations.rb at the end of the 'reverse_matches_for' method.
 commit => http://github.com/julienxaop/active_scaffold_hacks/commit/4ed532db3835e7c15d78e9fb841f364f300bc6d3
+
+
+##########################
+ActiveScaffold ActionLink
+##########################
+
+The ActiveScaffold default action links (:show, :edit, :delete...) apparently can't be removed without removing the action itself. 
+Example: If you want to remove the "Edit" link, you have to do: config.actions.exclude :update. 
+This will remove the link but you'll then not be able to update a row anymore (The inplace-edit columns will not be updatable anymore).
+
+I found it very strange that there was no way to just hide an action link without disableing the action itself. Maybe there is a way and I missed it. (If you know a way to do that, don't hesitate to let me know).
+
+Anyway, I've add a :hidden attribute accessor to the ActionLink class so know you can do:
+config.update.link.hidden = true
+in your controllers if you want to hide the "Edit" link (Or any any other action link: 'Show', 'Delete',... even if I don't see the utility to hide these links instead of just excluding their action)
+
+commit => http://github.com/julienxaop/active_scaffold_hacks/commit/8fc24ed41af1df390c8d08645468119337236aec

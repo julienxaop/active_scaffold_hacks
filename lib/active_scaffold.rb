@@ -1,4 +1,6 @@
 require "active_scaffold/constraints"
+require "active_scaffold/data_structures/action_link"
+require "active_scaffold/data_structures/action_links"
 ActiveScaffold::ClassMethods.class_eval do
   def active_scaffold(model_id = nil, &block)
     # initialize bridges here
